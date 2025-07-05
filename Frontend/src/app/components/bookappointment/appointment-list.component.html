@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Booked Appointments</h3>
+
+  <div *ngIf="appointments.length === 0">
+    <p>No appointments found.</p>
+  </div>
+
+  <div *ngFor="let app of appointments" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Doctor: {{ app.doctor }}</h5>
+      <p class="card-text"><strong>Specialist:</strong> {{ app.specialist }}</p>
+      <p class="card-text"><strong>Date:</strong> {{ app.date }}</p>
+      <p class="card-text"><strong>Time Slot:</strong> {{ app.timeSlot }}</p>
+      <p class="card-text"><strong>Reason:</strong> {{ app.reason }}</p>
+      <p class="card-text"><strong>Notes:</strong> {{ app.notes }}</p>
+    </div>
+  </div>
+</div>

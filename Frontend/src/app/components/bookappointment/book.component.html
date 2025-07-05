@@ -1,0 +1,103 @@
+<div class="container mt-4" style="max-width: 500px;">
+  <h3 class="mb-4 text-center">Book Appointment</h3>
+
+  <form [formGroup]="appointmentForm" (ngSubmit)="book()" class="p-3">
+{{errorMsg}}
+    <div class="mb-3">
+      <label for="specialist" class="form-label mb-1">Specialist</label>
+      <select
+        id="specialist"
+        class="form-control"
+        formControlName="specialist"
+        (change)="onSpecialistChange($event)"
+        [class.is-invalid]="appointmentForm.get('specialist')?.invalid && appointmentForm.get('specialist')?.touched"
+      >
+        <option value="" disabled selected>Select Specialist</option>
+        <option *ngFor="let sp of specialists" [value]="sp">{{ sp }}</option>
+      </select>
+      <div class="invalid-feedback" *ngIf="appointmentForm.get('specialist')?.invalid && appointmentForm.get('specialist')?.touched">
+        Specialist is required.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="doctor" class="form-label">Doctor</label>
+      <select
+        id="doctor"
+        class="form-control"
+        formControlName="doctor"
+        [class.is-invalid]="appointmentForm.get('doctor')?.invalid && appointmentForm.get('doctor')?.touched"
+      >
+        <option value="" disabled>Select Doctor</option>
+        <option *ngFor="let doc of filteredDoctors" [value]="doc.name">{{ doc.name }}</option>
+      </select>
+      <div class="invalid-feedback" *ngIf="appointmentForm.get('doctor')?.invalid && appointmentForm.get('doctor')?.touched">
+        Doctor is required.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input
+        id="date"
+        type="date"
+        class="form-control"
+        formControlName="date"
+        [class.is-invalid]="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched"
+      />
+      <div class="invalid-feedback" *ngIf="appointmentForm.get('date')?.invalid && appointmentForm.get('date')?.touched">
+        Date is required.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="timeSlot" class="form-label">Time Slot</label>
+      <select
+        id="timeSlot"
+        class="form-control"
+        formControlName="timeSlot"
+        [class.is-invalid]="appointmentForm.get('timeSlot')?.invalid && appointmentForm.get('timeSlot')?.touched"
+      >
+        <option value="" disabled>Select Time Slot</option>
+        <option *ngFor="let slot of timeSlots" [value]="slot">{{ slot }}</option>
+      </select>
+      <div class="invalid-feedback" *ngIf="appointmentForm.get('timeSlot')?.invalid && appointmentForm.get('timeSlot')?.touched">
+        Time slot is required.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="reasonForVisit" class="form-label">Reason for Visit</label>
+      <textarea
+        id="reasonForVisit"
+        class="form-control"
+        rows="3"
+        formControlName="reasonForVisit"
+        placeholder="Enter reason for your visit"
+        [class.is-invalid]="appointmentForm.get('reasonForVisit')?.invalid && appointmentForm.get('reasonForVisit')?.touched"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="appointmentForm.get('reasonForVisit')?.invalid && appointmentForm.get('reasonForVisit')?.touched">
+        Reason for visit is required.
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="additionalNotes" class="form-label">Additional Notes</label>
+      <textarea
+        id="additionalNotes"
+        class="form-control"
+        rows="3"
+        formControlName="additionalNotes"
+        placeholder="Any additional information (optional)"
+      ></textarea>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="appointmentForm.invalid">Book Now</button>
+  </form>
+  
+</div>
+<div class="text-end mt-3">
+  <button class="btn btn-secondary" [routerLink]="['/appointmentList']">
+    View Appointment List
+  </button>
+</div>
